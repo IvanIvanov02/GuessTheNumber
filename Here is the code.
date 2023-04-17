@@ -1,0 +1,75 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class GuessTheNumber {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        boolean numberIsRight = false;
+
+        while ( true ) {
+        Random generateRandomNumber = new Random();
+            byte tries = 0;
+            int number = generateRandomNumber.nextInt(100) + 1;
+
+        System.out.print("Guess a number between 1 and 100 --> ");
+            byte numberGuess;
+            try {
+            numberGuess = Byte.parseByte(scanner.nextLine()); 
+        } catch (NumberFormatException e) {
+            System.out.println("You need to enter an actual number, not a text");
+            continue;
+        }
+          if ( numberGuess <= 0 || numberGuess > 100 ) {
+              System.out.print("You need to guess a number between 1 and 100!\n");
+              continue;
+
+          }
+
+        while ( !numberIsRight ) {
+            
+            if ( numberGuess == number ) {
+                tries++;
+            System.out.printf("Great, you have tried %d times and have guessed the number! ",tries);
+            numberIsRight = true;
+
+        } else if ( numberGuess > number ) {
+                System.out.print("The number is lower, guess again --> ");
+                try {
+                    numberGuess = Byte.parseByte(scanner.nextLine());
+                } catch ( NumberFormatException e ) {
+                    System.out.println("You need to enter an actual number, not a text");
+                    continue;
+                }
+            if ( numberGuess <= 0 || numberGuess > 100 ) {
+                System.out.print("Invalid input, guess number between 1 and 100 --> ");
+                numberGuess = Byte.parseByte(scanner.nextLine());
+            }
+        } else {
+            System.out.print("The number is higher, guess again --> ");
+            try {
+                numberGuess = Byte.parseByte(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("You need to enter an actual number, not a text");
+                continue;
+            }
+                if ( numberGuess <= 0 || numberGuess > 100 ) {
+                    System.out.print("Invalid input, guess number between 1 and 100 --> ");
+                    numberGuess = Byte.parseByte(scanner.nextLine());
+                }
+        }
+        tries++;
+        }
+        numberIsRight = false;
+        System.out.print("Would you like to play a new game ? If so, type Yes --> ");
+        String newGame = scanner.nextLine();
+        if ( !newGame.equals("Yes")) {
+            break;
+        }
+
+    }
+    }
+    }
+
+
+
